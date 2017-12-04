@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.hortonvillerobotics.scoringapp_v1.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/field_matchNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Match Number"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/field_teamNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Team Number"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/autonomousHeader"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Autonomous:" />
+
+        <Switch
+            android:id="@+id/switch_ball"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Correct ball knocked off" />
+
+        <Switch
+            android:id="@+id/switch_glyph"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Glyph placed in box" />
+
+        <Switch
+            android:id="@+id/switch_crypto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Glyph placed in correct box" />
+
+        <Switch
+            android:id="@+id/switch_safeZone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Robot ends in safe zone" />
+
+        <TextView
+            android:id="@+id/teleopHeader"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TeleOp:" />
+
+        <EditText
+            android:id="@+id/field_relicZone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Zone Relic Ends in (0,1,2,3)"
+            android:inputType="number" />
+
+        <Switch
+            android:id="@+id/switch_relicUpright"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Relic ends upright" />
+
+        <Switch
+            android:id="@+id/switch_robotBalanced"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Robot balance at end of match" />
+
+        <EditText
+            android:id="@+id/field_numberGlyphs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Number of glyphs scored"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/field_rowGlyphs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Rows of glyphs scored"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/field_columnGlyphs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Columns of glyphs scored"
+            android:inputType="number" />
+
+        <Switch
+            android:id="@+id/switch_pattern"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pattern completed" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit Match" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
