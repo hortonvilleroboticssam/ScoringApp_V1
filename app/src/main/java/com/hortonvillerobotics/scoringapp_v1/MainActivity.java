@@ -31,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progress;
 
     EditText teamNumber;
+    EditText matchNumber;
     EditText relicZone;
     Button button;
-    String tN;
-    String rZ;
+    String[] results = new String[13];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         button=(Button)findViewById(R.id.btn_submit);
         teamNumber =(EditText)findViewById(R.id.field_teamNumber);
+        matchNumber = (EditText)findViewById(R.id.field_matchNumber);
         relicZone =(EditText)findViewById(R.id.field_relicZone);
 
 
@@ -52,9 +53,10 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO: ENTER ALL POSSIBLE PARAMETERS THAT ARE IN THE GOOGLE SCRIPT
+                results[1] = teamNumber.getText().toString();
 
-                tN = teamNumber.getText().toString();
-                rZ = relicZone.getText().toString();
+                results[6] = relicZone.getText().toString();
 
                 new MainActivity.SendRequest().execute();
             }
@@ -104,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject postDataParams = new JSONObject();
 
                 String id= "14DoM0-EFK_oKTBs1sgPWpb5_Lb9PVxKGNuI44nqNT3Y";
-
-                postDataParams.put("teamNumber", tN);
-                postDataParams.put("relicZone", "0");
+                postDataParams.put("matchNumber",results[0]);
+                postDataParams.put("teamNumber", results[1]);
+                postDataParams.put("relicZone", results[6]);
                 postDataParams.put("id",id);
 
 
