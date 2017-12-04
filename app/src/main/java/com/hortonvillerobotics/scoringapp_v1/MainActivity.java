@@ -2,7 +2,6 @@ package com.hortonvillerobotics.scoringapp_v1;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -108,7 +107,17 @@ public class MainActivity extends AppCompatActivity {
                 String id= "14DoM0-EFK_oKTBs1sgPWpb5_Lb9PVxKGNuI44nqNT3Y";
                 postDataParams.put("matchNumber",results[0]);
                 postDataParams.put("teamNumber", results[1]);
+                postDataParams.put("autoJewel", results[2]);
+                postDataParams.put("autoGlyph", results[3]);
+                postDataParams.put("autoCrypto", results[4]);
+                postDataParams.put("safeZone", results[5]);
                 postDataParams.put("relicZone", results[6]);
+                postDataParams.put("relicUpright", results[7]);
+                postDataParams.put("balanced", results[8]);
+                postDataParams.put("totalGlyphs", results[9]);
+                postDataParams.put("glyphRows", results[10]);
+                postDataParams.put("GlyphCols", results[11]);
+                postDataParams.put("Cypher", results[12]);
                 postDataParams.put("id",id);
 
 
