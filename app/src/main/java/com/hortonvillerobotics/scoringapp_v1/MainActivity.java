@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Switch;
 import android.widget.Toast;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -29,10 +30,22 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressDialog progress;
 
-    EditText teamNumber;
     EditText matchNumber;
+    EditText teamNumber;
+    Switch jewel;
+    Switch autoGlyph;
+    Switch autoCrypto;
+    Switch safeZone;
     EditText relicZone;
+    Switch relicUpright;
+    Switch balanced;
+    EditText numberGlyphs;
+    EditText rowGlyphs;
+    EditText colGlyphs;
+    Switch pattern;
     Button button;
+
+
     String[] results = new String[13];
 
     @Override
@@ -43,19 +56,38 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         button=(Button)findViewById(R.id.btn_submit);
-        teamNumber =(EditText)findViewById(R.id.field_teamNumber);
+
         matchNumber = (EditText)findViewById(R.id.field_matchNumber);
+        teamNumber =(EditText)findViewById(R.id.field_teamNumber);
+        jewel = findViewById(R.id.switch_ball);
+        autoGlyph = findViewById(R.id.switch_glyph);
+        autoCrypto = findViewById(R.id.switch_crypto);
+        safeZone = findViewById(R.id.switch_safeZone);
         relicZone =(EditText)findViewById(R.id.field_relicZone);
-
-
+        relicUpright = findViewById(R.id.switch_relicUpright);
+        balanced = findViewById(R.id.switch_robotBalanced);
+        numberGlyphs = (EditText) findViewById(R.id.field_numberGlyphs);
+        rowGlyphs = (EditText) findViewById(R.id.field_rowGlyphs);
+        colGlyphs = (EditText) findViewById(R.id.field_columnGlyphs);
+        pattern = findViewById(R.id.switch_pattern);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: ENTER ALL POSSIBLE PARAMETERS THAT ARE IN THE GOOGLE SCRIPT
+                results[0] = matchNumber.getText().toString();
                 results[1] = teamNumber.getText().toString();
-
+                results[2] = "" + jewel.isChecked();
+                results[3] = "" + autoGlyph.isChecked();
+                results[4] = "" + autoCrypto.isChecked();
+                results[5] = "" + safeZone.isChecked();
                 results[6] = relicZone.getText().toString();
+                results[7] = "" + relicUpright.isChecked();
+                results[8] = "" + balanced.isChecked();
+                results[9] = numberGlyphs.getText().toString();
+                results[10] = rowGlyphs.getText().toString();
+                results[11] = colGlyphs.getText().toString();
+                results[12] = "" + balanced.isChecked();
 
                 new MainActivity.SendRequest().execute();
             }
@@ -103,21 +135,15 @@ public class MainActivity extends AppCompatActivity {
 
                 URL url = new URL("https://script.google.com/a/hortonvillerobotics.com/macros/s/AKfycbzSukoOXFOX1jKz3rp7MDyrG_czuIuk6zeoA-3iNLy1AH4KD58/exec");
                 JSONObject postDataParams = new JSONObject();
-
                 String id= "14DoM0-EFK_oKTBs1sgPWpb5_Lb9PVxKGNuI44nqNT3Y";
-                postDataParams.put("matchNumber",results[0]);
-                postDataParams.put("teamNumber", results[1]);
-                postDataParams.put("autoJewel", results[2]);
-                postDataParams.put("autoGlyph", results[3]);
-                postDataParams.put("autoCrypto", results[4]);
-                postDataParams.put("safeZone", results[5]);
-                postDataParams.put("relicZone", results[6]);
-                postDataParams.put("relicUpright", results[7]);
-                postDataParams.put("balanced", results[8]);
-                postDataParams.put("totalGlyphs", results[9]);
-                postDataParams.put("glyphRows", results[10]);
-                postDataParams.put("GlyphCols", results[11]);
-                postDataParams.put("Cypher", results[12]);
+
+                String[] parameters = {"matchNumber", "teamNumber", "autoJewel"
+                , "autoGlyph", "autoCrypto", "safeZone", "relicZone", "relicUpright"
+                , "balanced", "totalGlyphs", "glyphRows", "glyphCols", "pattern"};
+
+                for(int i = 0; i < parameters.length; i++) {
+                    postDataParams.put(parameters[i],results[i]);
+                }
                 postDataParams.put("id",id);
 
 
