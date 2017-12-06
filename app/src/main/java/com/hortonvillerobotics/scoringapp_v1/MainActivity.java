@@ -1,8 +1,13 @@
 package com.hortonvillerobotics.scoringapp_v1;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -43,10 +48,12 @@ public class MainActivity extends AppCompatActivity {
     EditText rowGlyphs;
     EditText colGlyphs;
     Switch pattern;
+    EditText notes;
     Button button;
 
+    SharedPreferences pM;
 
-    String[] results = new String[13];
+    String[] results = new String[14];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        pM = PreferenceManager.getDefaultSharedPreferences(this);
 
         button=(Button)findViewById(R.id.btn_submit);
 
@@ -69,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         numberGlyphs = (EditText) findViewById(R.id.field_numberGlyphs);
         rowGlyphs = (EditText) findViewById(R.id.field_rowGlyphs);
         colGlyphs = (EditText) findViewById(R.id.field_columnGlyphs);
+        notes = (EditText) findViewById(R.id.field_comments);
         pattern = findViewById(R.id.switch_pattern);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 results[10] = rowGlyphs.getText().toString();
                 results[11] = colGlyphs.getText().toString();
                 results[12] = "" + balanced.isChecked();
+                results[13] = notes.getText().toString();
 
                 new MainActivity.SendRequest().execute();
             }
@@ -96,11 +107,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static class SettingsFrag extends PreferenceFragment{
+
+
+    public static class PrefsFragment extends PreferenceFragment {
+
         @Override
-        public void onCreate(Bundle savedInstancestate){
-            super.onCreate(savedInstancestate);
-            addPreferencesFromResource(R.xml.pref_notification);
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            // Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.settings);
         }
     }
 
@@ -120,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this, SettingsActivity.class);
+            Toast.makeText(this, "Made it here!", Toast.LENGTH_LONG);
+            startActivity(i);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -133,13 +152,15 @@ public class MainActivity extends AppCompatActivity {
 
             try{
 
+                String sheetID = pM.getString(getString(R.string.sheetID), "");
+
                 URL url = new URL("https://script.google.com/a/hortonvillerobotics.com/macros/s/AKfycbzSukoOXFOX1jKz3rp7MDyrG_czuIuk6zeoA-3iNLy1AH4KD58/exec");
                 JSONObject postDataParams = new JSONObject();
-                String id= "14DoM0-EFK_oKTBs1sgPWpb5_Lb9PVxKGNuI44nqNT3Y";
+                String id= sheetID;//"14DoM0-EFK_oKTBs1sgPWpb5_Lb9PVxKGNuI44nqNT3Y";
 
                 String[] parameters = {"matchNumber", "teamNumber", "autoJewel"
                 , "autoGlyph", "autoCrypto", "safeZone", "relicZone", "relicUpright"
-                , "balanced", "totalGlyphs", "glyphRows", "glyphCols", "pattern"};
+                , "balanced", "totalGlyphs", "glyphRows", "glyphCols", "pattern","notes"};
 
                 for(int i = 0; i < parameters.length; i++) {
                     postDataParams.put(parameters[i],results[i]);
