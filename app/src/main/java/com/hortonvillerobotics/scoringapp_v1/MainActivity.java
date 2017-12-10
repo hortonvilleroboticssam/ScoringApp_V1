@@ -48,12 +48,13 @@ public class MainActivity extends AppCompatActivity {
     EditText rowGlyphs;
     EditText colGlyphs;
     Switch pattern;
+    Switch disconnected;
     EditText notes;
     Button button;
 
     SharedPreferences pM;
 
-    String[] results = new String[14];
+    String[] results = new String[15];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         rowGlyphs = (EditText) findViewById(R.id.field_rowGlyphs);
         colGlyphs = (EditText) findViewById(R.id.field_columnGlyphs);
         notes = (EditText) findViewById(R.id.field_comments);
+        disconnected = findViewById(R.id.switch_disconnect);
         pattern = findViewById(R.id.switch_pattern);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 results[10] = rowGlyphs.getText().toString();
                 results[11] = colGlyphs.getText().toString();
                 results[12] = "" + balanced.isChecked();
-                results[13] = notes.getText().toString();
+                results[13] = "" + disconnected.isChecked();
+                results[14] = notes.getText().toString();
 
                 new MainActivity.SendRequest().execute();
             }
@@ -160,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
 
                 String[] parameters = {"matchNumber", "teamNumber", "autoJewel"
                 , "autoGlyph", "autoCrypto", "safeZone", "relicZone", "relicUpright"
-                , "balanced", "totalGlyphs", "glyphRows", "glyphCols", "pattern","notes"};
+                , "balanced", "totalGlyphs", "glyphRows", "glyphCols", "pattern","disconnect"
+                , "notes"};
 
                 for(int i = 0; i < parameters.length; i++) {
                     postDataParams.put(parameters[i],results[i]);

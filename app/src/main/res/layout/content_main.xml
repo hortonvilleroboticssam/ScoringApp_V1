@@ -146,13 +146,22 @@
             android:layout_height="wrap_content"
             android:text="Pattern completed" />
 
+        <Switch
+            android:id="@+id/switch_disconnect"
+            android:textSize="22sp"
+            android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Has the robot disconnected"/>
+
         <EditText
             android:id="@+id/field_comments"
             android:textSize="22sp"
             android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Additional Comments" />
+            android:hint="Additional Comments"
+            android:inputType="text"/>
 
         <Button
             android:id="@+id/btn_submit"
