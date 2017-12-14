@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 results[9] = numberGlyphs.getText().toString();
                 results[10] = rowGlyphs.getText().toString();
                 results[11] = colGlyphs.getText().toString();
-                results[12] = "" + balanced.isChecked();
+                results[12] = "" + pattern.isChecked();
                 results[13] = "" + disconnected.isChecked();
                 results[14] = notes.getText().toString();
 
